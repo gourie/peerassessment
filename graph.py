@@ -24,7 +24,6 @@ class SimpleGraph(object):
     example_graph.n_edges = 8
     example_graph.neighbors(['A']) = ['B']
 
-    TODO: add method save_graph(json_file)
     """
     def __init__(self):
         self.edges = {}
@@ -49,6 +48,13 @@ class SimpleGraph(object):
         :return: list with one entry for every neighbor
         """
         return self.edges[node_id]
+
+    def save(self, json_filename: str) -> None:
+        try:
+            with open(json_filename, 'w') as fp:
+                json.dump(self.edges, fp, indent=4)
+        except Exception as e:
+            raise Exception('save throws error %s' % e)
 
 
 class WeightedGraph(SimpleGraph):
